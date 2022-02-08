@@ -1,0 +1,7 @@
+1. setup ElephantSQL for postgresql
+2. setup node-js project (npm i express pg pg-hstore body-parser)
+3. code test API for testing data retrieval from Postgresql
+4. create table & insert values
+5. testing using url http://localhost:3000/testdata
+6. build up products tables & insert sample data
+7. write express get url for querying products table and set it up as API to being retrieved by FE's products page

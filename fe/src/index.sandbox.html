@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="./css/pico.css" type="text/css" />
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.13.0/css/all.css">
+    <script type="text/javascript" src="./review.js"></script>
+    <script type="text/javascript" src="./data.js"></script>
+    <script type="text/javascript" src="./app.js"></script>
+    <title></title>
+  </head>
+  <body>
+    <main class="container">
+      <div>
+
+      </div>
+      <article>
+
+        <h1>The Minimalist Entrepreneur</h1>
+        <ul>
+          <span class="num">
+            0
+          </span>
+          <i class="far fa-star" style="color: #FFCC33; cursor: pointer" data-num="1"></i>
+          <i class="far fa-star" style="color: #FFCC33; cursor: pointer" data-num="2"></i>
+          <i class="far fa-star" style="color: #FFCC33; cursor: pointer" data-num="3"></i>
+          <i class="far fa-star" style="color: #FFCC33; cursor: pointer" data-num="4"></i>
+          <i class="far fa-star" style="color: #FFCC33; cursor: pointer" data-num="5"></i>
+          <a href="#add" role="button" class="outline">Add review</a>
+        </ul>
+        <hr />
+        <h4>Review</h4>
+        <div class="static-reviews">
+          <ul class="ulreview">
+            <span class="num">
+              0
+            </span>
+            <i class="far fa-star" style="color: #FFCC33; cursor: pointer" data-num="1"></i>
+            <i class="far fa-star" style="color: #FFCC33; cursor: pointer" data-num="2"></i>
+            <i class="far fa-star" style="color: #FFCC33; cursor: pointer" data-num="3"></i>
+            <i class="far fa-star" style="color: #FFCC33; cursor: pointer" data-num="4"></i>
+            <i class="far fa-star" style="color: #FFCC33; cursor: pointer" data-num="5"></i>
+            <span>The best of the best!</span>
+            <span class="edit" style="display: none"><i class="fas fa-pen"></i></span>
+            <span class="delete" style="display: none"><i class="fas fa-times"></i></span>
+          </ul>
+          <ul class="ulreview">
+            <span class="num">
+              0
+            </span>
+            <i class="far fa-star" style="color: #FFCC33; cursor: pointer" data-num="1"></i>
+            <i class="far fa-star" style="color: #FFCC33; cursor: pointer" data-num="2"></i>
+            <i class="far fa-star" style="color: #FFCC33; cursor: pointer" data-num="3"></i>
+            <i class="far fa-star" style="color: #FFCC33; cursor: pointer" data-num="4"></i>
+            <i class="far fa-star" style="color: #FFCC33; cursor: pointer" data-num="5"></i>
+            <span>The best of the best!</span>
+            <span class="edit" style="display: none"><i class="fas fa-pen"></i></span>
+            <span class="delete" style="display: none"><i class="fas fa-times"></i></span>
+          </ul>
+          <ul class="ulreview">
+            <span class="num">
+              0
+            </span>
+            <i class="far fa-star" style="color: #FFCC33; cursor: pointer" data-num="1"></i>
+            <i class="far fa-star" style="color: #FFCC33; cursor: pointer" data-num="2"></i>
+            <i class="far fa-star" style="color: #FFCC33; cursor: pointer" data-num="3"></i>
+            <i class="far fa-star" style="color: #FFCC33; cursor: pointer" data-num="4"></i>
+            <i class="far fa-star" style="color: #FFCC33; cursor: pointer" data-num="5"></i>
+            <span>The best of the best!</span>
+            <span class="edit" style="display: none"><i class="fas fa-pen"></i></span>
+            <span class="delete" style="display: none"><i class="fas fa-times"></i></span>
+          </ul>
+          <ul class="ulreview">
+            <span class="num">
+              0
+            </span>
+            <i class="far fa-star rv-stars" style="color: #FFCC33; cursor: pointer" data-num="1"></i>
+            <i class="far fa-star rv-stars" style="color: #FFCC33; cursor: pointer" data-num="2"></i>
+            <i class="far fa-star rv-stars" style="color: #FFCC33; cursor: pointer" data-num="3"></i>
+            <i class="far fa-star rv-stars" style="color: #FFCC33; cursor: pointer" data-num="4"></i>
+            <i class="far fa-star rv-stars" style="color: #FFCC33; cursor: pointer" data-num="5"></i>
+            <span class="description">The best of the best!</span>
+            <span class="edit" style="display: none"><a href=""><i class="fas fa-pen"></i></a></span>
+            <span class="delete" style="display: none"><i class="fas fa-times"></i></span>
+          </ul>
+        </div>
+        <div class="dynamic-reviews">
+
+        </div>
+        <hr />
+        <h1 id="add">Whats Your Rating?</h1>
+        <p>
+          Rating
+        </p>
+        <ul>
+          <span class="new-num">
+            0
+          </span>
+          <i class="far fa-star new-review" style="color: #FFCC33; cursor: pointer" data-num="1"></i>
+          <i class="far fa-star new-review" style="color: #FFCC33; cursor: pointer" data-num="2"></i>
+          <i class="far fa-star new-review" style="color: #FFCC33; cursor: pointer" data-num="3"></i>
+          <i class="far fa-star new-review" style="color: #FFCC33; cursor: pointer" data-num="4"></i>
+          <i class="far fa-star new-review" style="color: #FFCC33; cursor: pointer" data-num="5"></i>
+        </ul>
+        <p>
+          Review
+        </p>
+        <input class="new-description" placeholder="" />
+        <button class="warning new-submit">Submit Review</button>
+      </article>
+    </main>
+  </body>
+  <script>
+
+/** For hovering edit & delete icon  */
+  const ulreview = document.querySelectorAll('.ulreview');
+  ulreview.forEach(review => {
+    review.onmouseover = () => {
+      review.children[7].setAttribute('style', 'display: inline');
+        review.children[8].setAttribute('style', 'display: inline');
+      // console.log('hovered');
+      // console.log(review.children[7].getAttribute('style'));
+    }
+    review.onmouseout = () => {
+      review.children[7].setAttribute('style', 'display: none');
+        review.children[8].setAttribute('style', 'display: none');
+      // console.log('hovered');
+      // console.log(review.children[7].getAttribute('style'));
+    }
+  })
+
+/** For hovering rating icon  */
+
+  let rating = 0;
+  const allstars = document.querySelectorAll('.fa-star');
+  allstars.forEach(star => {
+    star.onclick = () => {
+      let starLevel = star.getAttribute('data-num');
+      allstars.forEach(el => {
+        if(starLevel < el.getAttribute('data-num')) {
+          el.classList.remove('fas');
+          el.classList.add('far');
+        } else {
+          el.classList.remove('far');
+          el.classList.add('fas');
+        }
+      });
+      console.log(starLevel);
+      rating = starLevel;
+
+      const responses = listReviews(rating);
+
+      responses.then(res => res.json()).then(data => {
+        document.querySelectorAll('.description')[0].innerHTML = data.title;
+      })
+    }
+  });
+
+  /** For submitting reviews */
+
+  let reviews = {
+      rating : null,
+      description : null
+  }
+
+  const bintang = document.querySelectorAll('.new-review');
+  bintang.forEach(star => {
+    star.onclick = () => {
+      let starLevel = star.getAttribute('data-num');
+      console.log(starLevel);
+      reviews.rating = parseInt(starLevel);
+      console.log("Review's rating : " + reviews.rating);
+      bintang.forEach(el => {
+        if(starLevel < el.getAttribute('data-num')) {
+          el.classList.remove('fas');
+          el.classList.add('far');
+        } else {
+          el.classList.remove('far');
+          el.classList.add('fas');
+        }
+      });
+      console.log(reviews);
+      document.getElementsByClassName('new-num')[0].innerHTML = starLevel;
+    }
+  });
+
+  const deskripsi = document.querySelectorAll('.new-description');
+  deskripsi[0].onkeyup = () => {
+    reviews.description = deskripsi[0].value;
+    console.log(deskripsi[0].value);
+    console.log(reviews);
+  }
+
+  </script>
+</html>

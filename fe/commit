@@ -1,0 +1,16 @@
+1. Create scratch index.html
+2. import Pico.css
+3. import fontawesome icon css
+4. building card using <article></article>
+5. starting pre designed skeleton from figma
+6. write js for rating selection function (onclick) & returned the data-num value to another <span>
+7. write static reviews
+8. write onmouse over for enabling edit & delete button when reviews are being highlighted
+8. testing js script for retrieving data using fetch and apply the response into one of the static reviews
+9. create review.js based on point 8
+10. write new reviews form
+11. write js for new reviews (using the same rating selection on point 6) & create object based on the input
+12. write dynamic reviews retrieving js and loop the HTML into the <div> (using point 8 script), still using static data object
+13. create CRUD structure on review.js
+14. BE test ready and create new placeholder for reviews that coming from http://localhost:3000/testproducts
+14. creating product placeholder and set the data retrieved from BE
