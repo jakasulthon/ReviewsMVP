@@ -1,5 +1,6 @@
 const express = require('express');
 const postgre = require('pg');
+const cors = require('cors');
 const bodyParser = require('body-parser');
 
 /** Creating express App */
@@ -28,6 +29,7 @@ const pool = new Pool({
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false}));
+app.use(cors())
 
 /** DB connect */
 
@@ -48,7 +50,6 @@ pool.connect((err, client, release) => {
 
 app.get('/testdata', (req, res, next) => {
   console.log("TEST DATA : ");
-  res.setHeader('Access-Control-Allow-Origin', '*');
   pool.query('Select * from test')
     .then(testData => {
       console.log(testData);
@@ -59,7 +60,6 @@ app.get('/testdata', (req, res, next) => {
 
 app.get('/testproducts', (req, res, next) => {
   console.log("TEST products : ");
-  res.setHeader('Access-Control-Allow-Origin', '*');
   pool.query('Select data FROM products')
     .then(testData => {
       console.log(testData);
@@ -67,6 +67,34 @@ app.get('/testproducts', (req, res, next) => {
     });
 });
 
+
+app.post('/testreviews', (req, res, next) => {
+  console.log("TEST reviews : ");
+  console.log(req.body);
+
+  const queryme =
+  "UPDATE products SET data ="
+  + "jsonb_set(data, '{reviews, 5}',"
+  + " '{\"review_id\" : 7, \"rating\": 3, \"description\": \"good\"}', true)"
+  + " WHERE data ->> 'author' = 'Mark Manson'";
+
+  const queryres =
+  "UPDATE products SET data ="
+  + "jsonb_set(data, '{reviews, 5}',"
+  + " '" + JSON.stringify(req.body) +"', "
+  + "true)"
+  + " WHERE data ->> 'author' = 'Mark Manson'";
+
+  console.log(queryme);
+
+  console.log(queryres);
+
+  pool.query(queryres)
+    .then(testData => {
+      console.log(testData);
+      res.send(testData.rows);
+    });
+});
 
 const server = app.listen(3000, function () {
   let host = server.address().address;

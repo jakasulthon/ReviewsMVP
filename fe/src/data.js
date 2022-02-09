@@ -24,4 +24,4 @@ const REVIEW_DATA = [
   }
 ]
 
-console.log(JSON.stringify(REVIEW_DATA));
+// console.log(JSON.stringify(REVIEW_DATA));

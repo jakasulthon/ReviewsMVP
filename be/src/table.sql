@@ -1,6 +1,6 @@
 CREATE TABLE products(
   id serial primary key,
-  data JSON
+  data JSONB
 );
 
 INSERT INTO products (data) VALUES(
@@ -8,3 +8,15 @@ INSERT INTO products (data) VALUES(
 ),
 
 SELECT DATA ->> 'id' AS product_id FROM products;
+SELECT data FROM products;
+
+UPDATE products SET data = JSONB_SET(data, '{reviews, 3}', '{"review_id" : 5, "rating": 4, "description": "The best book i have ever read"}', true)
+WHERE data ->> 'author' = 'Mark Manson';
+
+UPDATE products SET data = JSONB_SET(data, '{reviews, 4}', '{"review_id" : 5, "rating": 5, "description": "This book made my day"}', true)
+WHERE data ->> 'author' = 'Mark Manson';
+
+UPDATE products SET data = JSONB_SET(data, '{reviews, 5}', '{"review_id" : 5, "rating": 5, "description": "The coolest thing on the book is how fastinating the author telling his story is"}', true)
+WHERE data ->> 'author' = 'Mark Manson';
+
+SELECT data ->> 'rating' AS rating from products WHERE data ->> 'author' = 'Mark Manson';

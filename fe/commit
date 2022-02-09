@@ -13,4 +13,5 @@
 12. write dynamic reviews retrieving js and loop the HTML into the <div> (using point 8 script), still using static data object
 13. create CRUD structure on review.js
 14. BE test ready and create new placeholder for reviews that coming from http://localhost:3000/testproducts
-14. creating product placeholder and set the data retrieved from BE
+15. creating product placeholder and set the data retrieved from BE
+16. write js for fetching post request consist of new review to BE

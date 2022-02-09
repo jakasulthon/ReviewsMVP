@@ -7,7 +7,16 @@ async function listReview () {
 }
 
 async function saveReview (review) {
-    return await fetch('https://jsonplaceholder.typicode.com/todos/' + review);
+    return await fetch('http:localhost:3000/testreviews', {
+      method: 'POST',
+      mode: 'cors',
+      credentials: 'same-origin',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(review),
+    });
+    console.log(JSON.stringify(review));
 }
 
 async function listReviews (review) {

@@ -183,7 +183,7 @@
     pd_HTML += '<a href="#add" role="button" class="outline">Add review</a>'
     pd_HTML += '</ul>';
 
-    console.log(pd_HTML);
+    // console.log(pd_HTML);
     pd_placeholders.innerHTML = pd_HTML;
   });
 
@@ -210,7 +210,7 @@
       rv3_HTML += '</ul>';
     });
 
-    console.log(rv3_HTML);
+    // console.log(rv3_HTML);
     rv3_placeholders.innerHTML = rv3_HTML;
   });
 
@@ -266,6 +266,7 @@
   /** For submitting reviews */
 
   let reviews = {
+      review_id : 7,
       rating : null,
       description : null
   }
@@ -296,6 +297,13 @@
     reviews.description = deskripsi[0].value;
     console.log(deskripsi[0].value);
     console.log(reviews);
+  }
+
+  const submit = document.querySelectorAll('.new-submit');
+  submit[0].onclick = () => {
+    const hasil = saveReview(reviews);
+    // const hasil = "clicked";
+    console.log(hasil);
   }
 
   </script>

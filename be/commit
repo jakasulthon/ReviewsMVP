@@ -5,3 +5,5 @@
 5. testing using url http://localhost:3000/testdata
 6. build up products tables & insert sample data
 7. write express get url for querying products table and set it up as API to being retrieved by FE's products page
+8. setup sql for update the review manually by sql description, push some new review via sql script
+9. integrate the sql script to new review js script (the object will be sent into sql script and update the jsob object inside products table)
