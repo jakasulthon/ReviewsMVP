@@ -11,11 +11,21 @@ const app = express();
 
 const Pool = postgre.Pool;
 
+// const pool = new Pool({
+//   user: 'gwqxmugy',
+//   host: 'rosie.db.elephantsql.com',
+//   database : 'gwqxmugy',
+//   password: 'aO0qABLnCIQESmELqlK4_jVZx8_-bvC3',
+//   dialect: 'postgres',
+//   port: 5432,
+// });
+
+
 const pool = new Pool({
-  user: 'gwqxmugy',
-  host: 'rosie.db.elephantsql.com',
-  database : 'gwqxmugy',
-  password: 'aO0qABLnCIQESmELqlK4_jVZx8_-bvC3',
+  user: 'jaka',
+  host: 'localhost',
+  database : 'jaka',
+  password: '',
   dialect: 'postgres',
   port: 5432,
 });
@@ -74,13 +84,13 @@ app.post('/testreviews', (req, res, next) => {
 
   const queryme =
   "UPDATE products SET data ="
-  + "jsonb_set(data, '{reviews, 5}',"
+  + "jsonb_set(data, '{reviews, 2}',"
   + " '{\"review_id\" : 7, \"rating\": 3, \"description\": \"good\"}', true)"
   + " WHERE data ->> 'author' = 'Mark Manson'";
 
   const queryres =
   "UPDATE products SET data ="
-  + "jsonb_set(data, '{reviews, 5}',"
+  + "jsonb_set(data, '{reviews, 999999}',"
   + " '" + JSON.stringify(req.body) +"', "
   + "true)"
   + " WHERE data ->> 'author' = 'Mark Manson'";

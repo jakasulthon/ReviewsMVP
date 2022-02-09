@@ -1,5 +1,5 @@
-async function listAllReviews (review) {
-    return await fetch('https://jsonplaceholder.typicode.com/todos/' + review);
+async function listAllReviews (product) {
+    return await fetch('http:localhost:3000/product/'+ product);
 }
 
 async function listReview () {

@@ -266,7 +266,7 @@
   /** For submitting reviews */
 
   let reviews = {
-      review_id : 7,
+      review_id : create_UUID(),
       rating : null,
       description : null
   }
@@ -302,6 +302,16 @@
   const submit = document.querySelectorAll('.new-submit');
   submit[0].onclick = () => {
     const hasil = saveReview(reviews);
+
+    hasil.then(res => {
+      const status = res.status;
+
+      console.log(status);
+      if (res.status === 200) {
+        window.alert("you have submitted the reviews!")
+        location.reload();
+      }
+    });
     // const hasil = "clicked";
     console.log(hasil);
   }

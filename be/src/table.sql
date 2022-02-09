@@ -4,8 +4,11 @@ CREATE TABLE products(
 );
 
 INSERT INTO products (data) VALUES(
-  '{"id":1,"product":"The Subtle Art of Not Giving a F*ck: A Counterintuitive Approach to Living a Good Life","author":"Mark Manson","rating":4.4,"reviews":[{"review_id":1,"rating":4,"description":"[a] good yardstick by which self-improvement books should be measured."},{"review_id":2,"rating":5,"description":"If you follow my reviews/blog at all, you probably already know that I am already a zero fucks given kind of gal when it comes to, well, bullshit."},{"review_id":3,"rating":3,"description":"I sometimes diverge from my comfort zone (fiction mainly mystery, thriller, classics etc.) to explore other genres. This read was the outcome of such an expedition."}]}'
-),
+  '{"id":1,"product":"The Subtle Art of Not Giving a F*ck: A Counterintuitive Approach to Living a Good Life","author":"Mark Manson","rating":4.4,"reviews":[{"review_id":"07a78003-c524-4ca7-88a6-5e274964669c","rating":4,"description":"[a] good yardstick by which self-improvement books should be measured."},{"review_id":"066dcbd6-8833-4141-9e2c-476a44cb6c3d","rating":5,"description":"If you follow my reviews/blog at all, you probably already know that I am already a zero fucks given kind of gal when it comes to, well, bullshit."},{"review_id":"dcdfd66e-1ae6-4994-8c92-c4470c4bdd37","rating":3,"description":"I sometimes diverge from my comfort zone (fiction mainly mystery, thriller, classics etc.) to explore other genres. This read was the outcome of such an expedition."}]}'
+);
+
+
+
 
 SELECT DATA ->> 'id' AS product_id FROM products;
 SELECT data FROM products;
@@ -18,5 +21,7 @@ WHERE data ->> 'author' = 'Mark Manson';
 
 UPDATE products SET data = JSONB_SET(data, '{reviews, 5}', '{"review_id" : 5, "rating": 5, "description": "The coolest thing on the book is how fastinating the author telling his story is"}', true)
 WHERE data ->> 'author' = 'Mark Manson';
+
+UPDATE products SET data =jsonb_set(data, '{reviews, 5}', '{"review_id" : 5, "rating": 5, "description": "This review comes from the product page"}') WHERE data ->> 'author' = 'Mark Manson'
 
 SELECT data ->> 'rating' AS rating from products WHERE data ->> 'author' = 'Mark Manson';

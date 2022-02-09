@@ -15,3 +15,4 @@
 14. BE test ready and create new placeholder for reviews that coming from http://localhost:3000/testproducts
 15. creating product placeholder and set the data retrieved from BE
 16. write js for fetching post request consist of new review to BE
+17. customize response 200 action for new reviews to alert reviews has been submitted and refresh the page
