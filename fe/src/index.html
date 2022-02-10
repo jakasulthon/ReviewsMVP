@@ -118,10 +118,16 @@
           <i class="far fa-star new-review" style="color: #FFCC33; cursor: pointer" data-num="3"></i>
           <i class="far fa-star new-review" style="color: #FFCC33; cursor: pointer" data-num="4"></i>
           <i class="far fa-star new-review" style="color: #FFCC33; cursor: pointer" data-num="5"></i>
+          <span class="new-alert" style="color: red" hidden>
+            Please fill the rating
+          </span>
         </ul>
         <p>
           Review
         </p>
+        <span class="new-alert" style="color: red" hidden>
+          Please fill the description
+        </span>
         <input class="new-description" placeholder="" />
         <button class="warning new-submit">Submit Review</button>
       </article>
@@ -329,6 +335,9 @@
       description : null
   }
 
+
+  const newalert = document.querySelectorAll('.new-alert');
+
   const bintang = document.querySelectorAll('.new-review');
   bintang.forEach(star => {
     star.onclick = () => {
@@ -347,6 +356,7 @@
       });
       console.log(reviews);
       document.getElementsByClassName('new-num')[0].innerHTML = starLevel;
+      newalert[0].setAttribute("hidden", "");
     }
   });
 
@@ -359,19 +369,34 @@
 
   const submit = document.querySelectorAll('.new-submit');
   submit[0].onclick = () => {
-    const hasil = saveReview(reviews);
+    if (reviews.rating === null) {
+      console.log(newalert[0].innerHTML);
+      return newalert[0].removeAttribute("hidden");
 
-    hasil.then(res => {
-      const status = res.status;
+    } else if (reviews.description === null || reviews.description === '') {
+      console.log(newalert[1].innerHTML);
+      return newalert[1].removeAttribute("hidden");
 
-      console.log(status);
-      if (res.status === 200) {
-        window.alert("you have submitted the reviews!")
-        location.reload();
-      }
-    });
-    // const hasil = "clicked";
-    console.log(hasil);
+    } else if (reviews.description.length >= 0) {
+      newalert[1].setAttribute("hidden", "");
+      
+      const hasil = saveReview(reviews);
+
+
+      hasil.then(res => {
+        const status = res.status;
+
+        console.log(status);
+        if (res.status === 200) {
+          window.alert("you have submitted the reviews!")
+          location.reload();
+        }
+      });
+      // const hasil = "clicked";
+      console.log(hasil);
+    }
+
+
   }
 
   </script>
