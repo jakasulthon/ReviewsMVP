@@ -346,11 +346,14 @@ if (urlParams.get('id') == null) {
 
   /** For submitting reviews */
 
-  let reviews = {
-      review_id : create_UUID(),
-      rating : null,
-      description : null
-  }
+  let reviews_json = {
+        id : product_id,
+        reviews : {
+          review_id : create_UUID(),
+          rating : null,
+          description : null
+        }
+      }
 
 
   const newalert = document.querySelectorAll('.new-alert');
@@ -360,8 +363,8 @@ if (urlParams.get('id') == null) {
     star.onclick = () => {
       let starLevel = star.getAttribute('data-num');
       console.log(starLevel);
-      reviews.rating = parseInt(starLevel);
-      console.log("Review's rating : " + reviews.rating);
+      reviews_json.reviews.rating = parseInt(starLevel);
+      console.log("Review's rating : " + reviews_json.reviews.rating);
       bintang.forEach(el => {
         if(starLevel < el.getAttribute('data-num')) {
           el.classList.remove('fas');
@@ -371,7 +374,7 @@ if (urlParams.get('id') == null) {
           el.classList.add('fas');
         }
       });
-      console.log(reviews);
+      console.log(reviews_json);
       document.getElementsByClassName('new-num')[0].innerHTML = starLevel;
       newalert[0].setAttribute("hidden", "");
     }
@@ -379,25 +382,25 @@ if (urlParams.get('id') == null) {
 
   const deskripsi = document.querySelectorAll('.new-description');
   deskripsi[0].onkeyup = () => {
-    reviews.description = deskripsi[0].value;
+    reviews_json.reviews.description = deskripsi[0].value;
     console.log(deskripsi[0].value);
-    console.log(reviews);
+    console.log(reviews_json);
   }
 
   const submit = document.querySelectorAll('.new-submit');
   submit[0].onclick = () => {
-    if (reviews.rating === null) {
+    if (reviews_json.reviews.rating === null) {
       console.log(newalert[0].innerHTML);
       return newalert[0].removeAttribute("hidden");
 
-    } else if (reviews.description === null || reviews.description === '') {
+    } else if (reviews_json.reviews.description === null || reviews_json.reviews.description === '') {
       console.log(newalert[1].innerHTML);
       return newalert[1].removeAttribute("hidden");
 
-    } else if (reviews.description.length >= 0) {
+    } else if (reviews_json.reviews.description.length >= 0) {
       newalert[1].setAttribute("hidden", "");
 
-      const hasil = saveReview(reviews);
+      const hasil = saveReview(reviews_json);
 
 
       hasil.then(res => {

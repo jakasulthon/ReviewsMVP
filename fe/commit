@@ -21,3 +21,4 @@
 20. Create products.sandbox.html for listing products & create modification on url param to support product listing with the right id
 21. Modify fetch for product's review on corresponding product id
 22. Write redirection script to products page when the id param is not exist
+23. Change json structure for new reviews and change all variable naming on the script that using new json structure

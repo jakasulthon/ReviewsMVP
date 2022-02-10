@@ -169,6 +169,29 @@ app.post('/testreviews', (req, res, next) => {
   // console.log(queryres);
 
   // v2 query
+  // const querymenewreviews =
+  // "UPDATE productsnew SET reviews = reviews || "
+  // + " '{\"review_id\" : \"8ac94403-0b86-4eba-b81b-0e19293fbba4\","
+  // + "\"rating\" : 4,"
+  // + "\"description\" : \"I want this book for my grandson\"}'::JSONB "
+  // + "WHERE id = 1;";
+  //
+  // const querynewreviews =
+  // "UPDATE productsnew SET reviews = reviews || "
+  // + "'"+JSON.stringify(req.body)+"'::JSONB "
+  // + "WHERE id = 1;";
+  //
+  // console.log(querymenewreviews);
+  // console.log(querynewreviews);
+  //
+  // pool.query(querynewreviews)
+  //   .then(testData => {
+  //     console.log(testData);
+  //     res.send(testData.rows);
+  //   });
+
+
+  // v3 query
   const querymenewreviews =
   "UPDATE productsnew SET reviews = reviews || "
   + " '{\"review_id\" : \"8ac94403-0b86-4eba-b81b-0e19293fbba4\","
@@ -178,15 +201,15 @@ app.post('/testreviews', (req, res, next) => {
 
   const querynewreviews =
   "UPDATE productsnew SET reviews = reviews || "
-  + "'"+JSON.stringify(req.body)+"'::JSONB "
-  + "WHERE id = 1;";
+  + "'" + JSON.stringify(req.body.reviews) + "'::JSONB "
+  + "WHERE id = " + req.body.id + ";";
 
   console.log(querymenewreviews);
   console.log(querynewreviews);
 
   pool.query(querynewreviews)
     .then(testData => {
-      console.log(testData);
+      // console.log(testData);
       res.send(testData.rows);
     });
 });
