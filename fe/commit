@@ -16,3 +16,4 @@
 15. creating product placeholder and set the data retrieved from BE
 16. write js for fetching post request consist of new review to BE
 17. customize response 200 action for new reviews to alert reviews has been submitted and refresh the page
+18. Loop the new structured json response to reviews placeholder
