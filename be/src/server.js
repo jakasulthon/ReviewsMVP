@@ -69,6 +69,18 @@ app.get('/products', (req, res, next) => {
     });
 });
 
+
+// v1 products/:id
+app.put('/products/:id', (req, res, next) => {
+  console.log("TEST productsnew "+ req.body.id +" : ");
+  pool.query('Select * from productsnew WHERE id = ' + req.body.id +'')
+    .then(testData => {
+      // console.log(testData);
+      res.send(testData.rows);
+    });
+});
+
+
 // v1 testdata
 app.get('/testdata', (req, res, next) => {
   console.log("TEST DATA : ");

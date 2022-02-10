@@ -14,7 +14,7 @@
       <div>
 
       </div>
-      <article>
+      <article id="article-placeholder">
         <div class="static-products" hidden>
           <h1>The Minimalist Entrepreneur</h1>
           <ul>
@@ -136,13 +136,18 @@
   <script>
 
 
-/** For getting product id */
+/** For getting product id & redirect if product id is null */
 
 const queryString = window.location.search;
 const urlParams = new URLSearchParams(queryString);
 const product_id = parseInt(urlParams.get('id'));
 
 console.log(product_id);
+
+if (urlParams.get('id') == null) {
+  window.location.href = "./products.sandbox.html";
+  console.log(product_id + ' is NaN');
+};
 
 
 /** For listing reviews */
@@ -214,7 +219,7 @@ console.log(product_id);
 
 
 
-  const RETRIEVED_DATA2 = listReview(product_id);
+  const RETRIEVED_DATA2 = listAllReviews(product_id);
 
   let pd2_HTML = "";
 
@@ -229,6 +234,8 @@ console.log(product_id);
     };
     pd2_HTML += '<a href="#add" role="button" class="outline">Add review</a>'
     pd2_HTML += '</ul>';
+
+    document.title = data[0].product;
 
     // console.log(pd_HTML);
     pd2_placeholders.innerHTML = pd2_HTML;
@@ -263,7 +270,7 @@ console.log(product_id);
 
   // v4 - reviews
 
-  const RETRIEVED_DATA3 = listReview(product_id);
+  const RETRIEVED_DATA3 = listAllReviews(product_id);
 
   const rv4_placeholders = document.getElementById('dynamic4-reviews');
 

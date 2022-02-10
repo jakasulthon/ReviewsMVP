@@ -1,8 +1,18 @@
-async function listAllReviews (product) {
-    return await fetch('http:localhost:3000/product/'+ product);
+async function listAllReviews (product_id) {
+    const request_json = {
+      id : product_id,
+    }
+
+    return await fetch('http:localhost:3000/products/'+ product_id, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(request_json),
+    });
 }
 
-async function listReview (product_id) {
+async function listReview () {
     return await fetch('http:localhost:3000/testproducts');
 }
 
