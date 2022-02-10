@@ -9,3 +9,4 @@
 9. integrate the sql script to new review js script (the object will be sent into sql script and update the jsob object inside products table)
 10. write express post url to push json new reviews from FE using tested queries, and test API
 11. changes postgresql to local new setup and recreating tables (for latency purpose), change query to support json array position of the jsonb_set.
+12. Loop the new structured json response to reviews placeholder

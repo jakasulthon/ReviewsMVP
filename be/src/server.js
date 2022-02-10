@@ -68,43 +68,105 @@ app.get('/testdata', (req, res, next) => {
 });
 
 
+// v1 test products
+
+// app.get('/testproducts', (req, res, next) => {
+//   console.log("TEST products : ");
+//   pool.query('Select data FROM products')
+//     .then(testData => {
+//       console.log(testData);
+//       res.send(testData.rows);
+//     });
+// });
+
+// v2 test products
+
 app.get('/testproducts', (req, res, next) => {
   console.log("TEST products : ");
-  pool.query('Select data FROM products')
+  pool.query('Select * FROM productsnew')
     .then(testData => {
       console.log(testData);
       res.send(testData.rows);
     });
 });
 
+// v1 test reviews
+
+// app.post('/testreviews', (req, res, next) => {
+//   console.log("TEST reviews : ");
+//   console.log(req.body);
+//
+//   const queryme =
+//   "UPDATE products SET data ="
+//   + "jsonb_set(data, '{reviews, 2}',"
+//   + " '{\"review_id\" : 7, \"rating\": 3, \"description\": \"good\"}', true)"
+//   + " WHERE data ->> 'author' = 'Mark Manson'";
+//
+//   const queryres =
+//   "UPDATE products SET data ="
+//   + "jsonb_set(data, '{reviews, 999999}',"
+//   + " '" + JSON.stringify(req.body) +"', "
+//   + "true)"
+//   + " WHERE data ->> 'author' = 'Mark Manson'";
+//
+//   console.log(queryme);
+//
+//   console.log(queryres);
+//
+//   pool.query(queryres)
+//     .then(testData => {
+//       console.log(testData);
+//       res.send(testData.rows);
+//     });
+// });
+
+// v2 test reviews
 
 app.post('/testreviews', (req, res, next) => {
   console.log("TEST reviews : ");
   console.log(req.body);
 
-  const queryme =
-  "UPDATE products SET data ="
-  + "jsonb_set(data, '{reviews, 2}',"
-  + " '{\"review_id\" : 7, \"rating\": 3, \"description\": \"good\"}', true)"
-  + " WHERE data ->> 'author' = 'Mark Manson'";
+  // v1 query
+  // const queryme =
+  // "UPDATE productsnew SET data ="
+  // + "jsonb_set(data, '{reviews, 2}',"
+  // + " '{\"review_id\" : 7, \"rating\": 3, \"description\": \"good\"}', true)"
+  // + " WHERE data ->> 'author' = 'Mark Manson'";
+  //
+  // const queryres =
+  // "UPDATE products SET data ="
+  // + "jsonb_set(data, '{reviews, 999999}',"
+  // + " '" + JSON.stringify(req.body) +"', "
+  // + "true)"
+  // + " WHERE data ->> 'author' = 'Mark Manson'";
+  //
+  // console.log(queryme);
+  //
+  // console.log(queryres);
 
-  const queryres =
-  "UPDATE products SET data ="
-  + "jsonb_set(data, '{reviews, 999999}',"
-  + " '" + JSON.stringify(req.body) +"', "
-  + "true)"
-  + " WHERE data ->> 'author' = 'Mark Manson'";
+  // v2 query
+  const querymenewreviews =
+  "UPDATE productsnew SET reviews = reviews || "
+  + " '{\"review_id\" : \"8ac94403-0b86-4eba-b81b-0e19293fbba4\","
+  + "\"rating\" : 4,"
+  + "\"description\" : \"I want this book for my grandson\"}'::JSONB "
+  + "WHERE id = 1;";
 
-  console.log(queryme);
+  const querynewreviews =
+  "UPDATE productsnew SET reviews = reviews || "
+  + "'"+JSON.stringify(req.body)+"'::JSONB "
+  + "WHERE id = 1;";
 
-  console.log(queryres);
+  console.log(querymenewreviews);
+  console.log(querynewreviews);
 
-  pool.query(queryres)
+  pool.query(querynewreviews)
     .then(testData => {
       console.log(testData);
       res.send(testData.rows);
     });
 });
+
 
 const server = app.listen(3000, function () {
   let host = server.address().address;

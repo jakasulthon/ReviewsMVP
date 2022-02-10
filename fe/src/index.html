@@ -31,7 +31,10 @@
           <hr />
         </div>
 
-        <div id="dynamic-products">
+        <div id="dynamic-products" hidden>
+
+        </div>
+        <div id="dynamic2-products">
 
         </div>
         <h4>Review</h4>
@@ -95,7 +98,10 @@
         <div id="dynamic2-reviews"hidden>
 
         </div>
-        <div id="dynamic3-reviews">
+        <div id="dynamic3-reviews" hidden>
+
+        </div>
+        <div id="dynamic4-reviews">
 
         </div>
         <hr />
@@ -127,91 +133,143 @@
 /** For listing reviews */
 
   // v1 review
-  const rv_placeholders = document.getElementById('dynamic-reviews');
-  REVIEW_DATA[0].reviews.map(data => {
-    rv_placeholders.innerHTML +=
-      '<ul class="ulreview">'
-         + '<i class="far fa-star" style="color: #FFCC33; cursor: pointer" data-num="1"></i>'
-         + '<i class="far fa-star" style="color: #FFCC33; cursor: pointer" data-num="2"></i>'
-         + '<i class="far fa-star" style="color: #FFCC33; cursor: pointer" data-num="3"></i>'
-         + '<i class="far fa-star" style="color: #FFCC33; cursor: pointer" data-num="4"></i>'
-         + '<i class="far fa-star" style="color: #FFCC33; cursor: pointer" data-num="5"></i>'
-         + '<span> ' + data.rating + '</span> '
-         + '<span style="color: gray;">' + data.description + '</span> '
-         + '<span class="edit" style="display: none"><i class="fas fa-pen"></i></span>'
-         + '<span class="delete" style="display: none"><i class="fas fa-times"></i></span>'
-       + '</ul>';
-
-  });
+  // const rv_placeholders = document.getElementById('dynamic-reviews');
+  // REVIEW_DATA[0].reviews.map(data => {
+  //   rv_placeholders.innerHTML +=
+  //     '<ul class="ulreview">'
+  //        + '<i class="far fa-star" style="color: #FFCC33; cursor: pointer" data-num="1"></i>'
+  //        + '<i class="far fa-star" style="color: #FFCC33; cursor: pointer" data-num="2"></i>'
+  //        + '<i class="far fa-star" style="color: #FFCC33; cursor: pointer" data-num="3"></i>'
+  //        + '<i class="far fa-star" style="color: #FFCC33; cursor: pointer" data-num="4"></i>'
+  //        + '<i class="far fa-star" style="color: #FFCC33; cursor: pointer" data-num="5"></i>'
+  //        + '<span> ' + data.rating + '</span> '
+  //        + '<span style="color: gray;">' + data.description + '</span> '
+  //        + '<span class="edit" style="display: none"><i class="fas fa-pen"></i></span>'
+  //        + '<span class="delete" style="display: none"><i class="fas fa-times"></i></span>'
+  //      + '</ul>';
+  //
+  // });
   // console.log(REVIEW_DATA.length);
 
   // v2 - review
-  const rv2_placeholders = document.getElementById('dynamic2-reviews');
-  var HTML= "";
-  REVIEW_DATA[0].reviews.forEach((ob) => {
-      HTML += '<ul class="ulreview">';
-      for (var i=0; i < 5; i++) {
-        var icoClass = i < ob.rating ? 'fas fa-star' : 'far fa-star';
-        HTML += '<i class="' + icoClass + '" style="color: #FFCC33;"></i>';
-      };
-      HTML += '<span>' + ob.rating + '</span> ';
-      HTML += '<span style="color: gray">' + ob.description + '</span> ';
-      HTML += '<span class="edit" style="display: none"><i class="fas fa-pen"></i></span> ';
-      HTML += '<span class="delete" style="display: none"><i class="fas fa-times"></i></span> ';
-      HTML += '</ul>';
-  });
-  rv2_placeholders.innerHTML = HTML;
+  // const rv2_placeholders = document.getElementById('dynamic2-reviews');
+  // var HTML= "";
+  // REVIEW_DATA[0].reviews.forEach((ob) => {
+  //     HTML += '<ul class="ulreview">';
+  //     for (var i=0; i < 5; i++) {
+  //       var icoClass = i < ob.rating ? 'fas fa-star' : 'far fa-star';
+  //       HTML += '<i class="' + icoClass + '" style="color: #FFCC33;"></i>';
+  //     };
+  //     HTML += '<span>' + ob.rating + '</span> ';
+  //     HTML += '<span style="color: gray">' + ob.description + '</span> ';
+  //     HTML += '<span class="edit" style="display: none"><i class="fas fa-pen"></i></span> ';
+  //     HTML += '<span class="delete" style="display: none"><i class="fas fa-times"></i></span> ';
+  //     HTML += '</ul>';
+  // });
+  // rv2_placeholders.innerHTML = HTML;
 
   // v1 - products
 
-  const pd_placeholders = document.getElementById('dynamic-products');
+  // const pd_placeholders = document.getElementById('dynamic-products');
+  //
+  //
+  // const RETRIEVED_DATA1 = listReview();
+  //
+  // let pd_HTML = "";
+  //
+  // RETRIEVED_DATA1.then(res => res.json()).then(data => {
+  //   console.log(data);
+  //   pd_HTML += '<h1>'+ data[0].data.product +'</h1>';
+  //   pd_HTML += '<ul class="ulreview">';
+  //   pd_HTML += '<span>'+ data[0].data.rating +'</span>';
+  //   for (var i=0; i < 5; i++) {
+  //     var icoClass = i < data[0].data.rating ? 'fas fa-star' : 'far fa-star';
+  //     pd_HTML += '<i class="' + icoClass + '" style="color: #FFCC33;"></i>';
+  //   };
+  //   pd_HTML += '<a href="#add" role="button" class="outline">Add review</a>'
+  //   pd_HTML += '</ul>';
+  //
+  //   // console.log(pd_HTML);
+  //   pd_placeholders.innerHTML = pd_HTML;
+  // });
+
+  // v2 - products
+
+  const pd2_placeholders = document.getElementById('dynamic2-products');
 
 
-  const RETRIEVED_DATA1 = listReview();
+  const RETRIEVED_DATA2 = listReview();
 
-  let pd_HTML = "";
+  let pd2_HTML = "";
 
-  RETRIEVED_DATA1.then(res => res.json()).then(data => {
+  RETRIEVED_DATA2.then(res => res.json()).then(data => {
     console.log(data);
-    pd_HTML += '<h1>'+ data[0].data.product +'</h1>';
-    pd_HTML += '<ul class="ulreview">';
-    pd_HTML += '<span>'+ data[0].data.rating +'</span>';
+    pd2_HTML += '<h1>'+ data[0].product +'</h1>';
+    pd2_HTML += '<ul class="ulreview">';
+    pd2_HTML += '<span>'+ data[0].rating +'</span>';
     for (var i=0; i < 5; i++) {
-      var icoClass = i < data[0].data.rating ? 'fas fa-star' : 'far fa-star';
-      pd_HTML += '<i class="' + icoClass + '" style="color: #FFCC33;"></i>';
+      var icoClass = i < data[0].rating ? 'fas fa-star' : 'far fa-star';
+      pd2_HTML += '<i class="' + icoClass + '" style="color: #FFCC33;"></i>';
     };
-    pd_HTML += '<a href="#add" role="button" class="outline">Add review</a>'
-    pd_HTML += '</ul>';
+    pd2_HTML += '<a href="#add" role="button" class="outline">Add review</a>'
+    pd2_HTML += '</ul>';
 
     // console.log(pd_HTML);
-    pd_placeholders.innerHTML = pd_HTML;
+    pd2_placeholders.innerHTML = pd2_HTML;
   });
 
   // v3 - reviews
 
-  const RETRIEVED_DATA = listReview();
+  // const RETRIEVED_DATA = listReview();
+  //
+  // const rv3_placeholders = document.getElementById('dynamic3-reviews');
+  //
+  // let rv3_HTML = "";
+  //
+  // RETRIEVED_DATA.then(res => res.json()).then(data => {
+  //   console.log(data);
+  //   data[0].data.reviews.forEach((item) => {
+  //     rv3_HTML += '<ul class="ulreview">';
+  //     for (var i=0; i < 5; i++) {
+  //       var icoClass = i < item.rating ? 'fas fa-star' : 'far fa-star';
+  //       rv3_HTML += '<i class="' + icoClass + '" style="color: #FFCC33;"></i>';
+  //     };
+  //     rv3_HTML += '<span>' + item.rating + '</span> ';
+  //     rv3_HTML += '<span style="color: gray">' + item.description + '</span> ';
+  //     rv3_HTML += '<span class="edit" style="display: none"><i class="fas fa-pen"></i></span> ';
+  //     rv3_HTML += '<span class="delete" style="display: none"><i class="fas fa-times"></i></span> ';
+  //     rv3_HTML += '</ul>';
+  //   });
+  //
+  //   // console.log(rv3_HTML);
+  //   rv3_placeholders.innerHTML = rv3_HTML;
+  // });
 
-  const rv3_placeholders = document.getElementById('dynamic3-reviews');
+  // v4 - reviews
 
-  let rv3_HTML = "";
+  const RETRIEVED_DATA3 = listReview();
 
-  RETRIEVED_DATA.then(res => res.json()).then(data => {
+  const rv4_placeholders = document.getElementById('dynamic4-reviews');
+
+  let rv4_HTML = "";
+
+  RETRIEVED_DATA3.then(res => res.json()).then(data => {
     console.log(data);
-    data[0].data.reviews.forEach((item) => {
-      rv3_HTML += '<ul class="ulreview">';
+    data[0].reviews.forEach((item) => {
+      rv4_HTML += '<ul class="ulreview">';
       for (var i=0; i < 5; i++) {
         var icoClass = i < item.rating ? 'fas fa-star' : 'far fa-star';
-        rv3_HTML += '<i class="' + icoClass + '" style="color: #FFCC33;"></i>';
+        rv4_HTML += '<i class="' + icoClass + '" style="color: #FFCC33;"></i>';
       };
-      rv3_HTML += '<span>' + item.rating + '</span> ';
-      rv3_HTML += '<span style="color: gray">' + item.description + '</span> ';
-      rv3_HTML += '<span class="edit" style="display: none"><i class="fas fa-pen"></i></span> ';
-      rv3_HTML += '<span class="delete" style="display: none"><i class="fas fa-times"></i></span> ';
-      rv3_HTML += '</ul>';
+      rv4_HTML += '<span>' + item.rating + '</span> ';
+      rv4_HTML += '<span style="color: gray">' + item.description + '</span> ';
+      rv4_HTML += '<span class="edit" style="display: none"><i class="fas fa-pen"></i></span> ';
+      rv4_HTML += '<span class="delete" style="display: none"><i class="fas fa-times"></i></span> ';
+      rv4_HTML += '</ul>';
     });
 
     // console.log(rv3_HTML);
-    rv3_placeholders.innerHTML = rv3_HTML;
+    rv4_placeholders.innerHTML = rv4_HTML;
   });
 
 

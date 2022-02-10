@@ -1,3 +1,4 @@
+-- old postgresql products TABLE
 CREATE TABLE products(
   id serial primary key,
   data JSONB
@@ -25,3 +26,37 @@ WHERE data ->> 'author' = 'Mark Manson';
 UPDATE products SET data =jsonb_set(data, '{reviews, 5}', '{"review_id" : 5, "rating": 5, "description": "This review comes from the product page"}') WHERE data ->> 'author' = 'Mark Manson'
 
 SELECT data ->> 'rating' AS rating from products WHERE data ->> 'author' = 'Mark Manson';
+
+-- new restructured postgresql productsnew TABLE
+CREATE TABLE productsnew (
+id serial primary key not null,
+product varchar(255) not null,
+author varchar(255) not null,
+rating real not null,
+reviews JSONB
+);
+
+INSERT INTO productsnew (product, author, rating, reviews) VALUES (
+  'Da Vinci Code,The',
+  'Brown, Dan',
+  4.5,
+  '[
+    {
+      "review_id" : "bbd12c27-ecb4-48db-a860-896191ff5048",
+      "rating" : 4,
+      "description" : "I want this book badly"
+    }
+  ]'
+);
+
+UPDATE productsnew SET reviews = JSONB_SET(reviews, "999999", '{
+  "review_id" : "236fe45e-7522-4aea-a245-873bef2d3952",
+  "rating" : 4,
+  "description" : "I want this book for life"
+}');
+
+UPDATE productsnew SET reviews = reviews || '{
+  "review_id" : "236fe45e-7522-4aea-a245-873bef2d3952",
+  "rating" : 4,
+  "description" : "I want this book for life"
+}'::JSONB WHERE id = 1;
