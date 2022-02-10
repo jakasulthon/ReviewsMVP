@@ -2,7 +2,7 @@ async function listAllReviews (product) {
     return await fetch('http:localhost:3000/product/'+ product);
 }
 
-async function listReview () {
+async function listReview (product_id) {
     return await fetch('http:localhost:3000/testproducts');
 }
 

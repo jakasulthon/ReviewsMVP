@@ -10,3 +10,4 @@
 10. write express post url to push json new reviews from FE using tested queries, and test API
 11. changes postgresql to local new setup and recreating tables (for latency purpose), change query to support json array position of the jsonb_set.
 12. create new restructured table and change the returned products API response to more structured API response and change the query to match the new table structure
+13. Insert new product & Create new API link for products listing only

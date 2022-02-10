@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="./css/pico.css" type="text/css" />
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.13.0/css/all.css">
+    <script type="text/javascript" src="./product.js"></script>
+    <script type="text/javascript" src="./data.js"></script>
+    <script type="text/javascript" src="./app.js"></script>
+  </head>
+  <body>
+    <main class="container">
+        <article>
+          <div hidden>
+            <ul>
+              <li>
+                <span class="product-rating-num"></span>
+                <i class="far fa-star" style="color: #FFCC33; cursor: pointer" data-num="1"></i>
+                <i class="far fa-star" style="color: #FFCC33; cursor: pointer" data-num="2"></i>
+                <i class="far fa-star" style="color: #FFCC33; cursor: pointer" data-num="3"></i>
+                <i class="far fa-star" style="color: #FFCC33; cursor: pointer" data-num="4"></i>
+                <i class="far fa-star" style="color: #FFCC33; cursor: pointer" data-num="5"></i>
+                <span class="product-name">Da Vinci Code,The</span>
+              </li>
+            </ul>
+          </div>
+          <h1>List of books</h1>
+          <div id="prd-placeholder">
+
+          </div>
+        </article>
+    </main>
+  </body>
+  <script>
+    const prd_placeholder = document.getElementById("prd-placeholder");
+
+    const products = getAllProducts();
+
+    let prd_HTML = ""
+
+    products.then(res => res.json()).then(data => {
+      console.log(data);
+      prd_HTML += '<ul class="product-list">';
+      data.forEach((item) => {
+          prd_HTML += '<li>';
+          prd_HTML += '<a href="index.html?id='+ item.id +'"><span>'+ item.product +'</span></a>';
+          prd_HTML += '</li>';
+      });
+      prd_HTML += '</ul>';
+
+      prd_placeholder.innerHTML = prd_HTML;
+      console.log(prd_HTML);
+    });
+
+  </script>
+</html>

@@ -136,6 +136,15 @@
   <script>
 
 
+/** For getting product id */
+
+const queryString = window.location.search;
+const urlParams = new URLSearchParams(queryString);
+const product_id = parseInt(urlParams.get('id'));
+
+console.log(product_id);
+
+
 /** For listing reviews */
 
   // v1 review
@@ -204,7 +213,8 @@
   const pd2_placeholders = document.getElementById('dynamic2-products');
 
 
-  const RETRIEVED_DATA2 = listReview();
+
+  const RETRIEVED_DATA2 = listReview(product_id);
 
   let pd2_HTML = "";
 
@@ -253,7 +263,7 @@
 
   // v4 - reviews
 
-  const RETRIEVED_DATA3 = listReview();
+  const RETRIEVED_DATA3 = listReview(product_id);
 
   const rv4_placeholders = document.getElementById('dynamic4-reviews');
 
@@ -379,7 +389,7 @@
 
     } else if (reviews.description.length >= 0) {
       newalert[1].setAttribute("hidden", "");
-      
+
       const hasil = saveReview(reviews);
 
 

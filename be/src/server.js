@@ -58,6 +58,18 @@ pool.connect((err, client, release) => {
   });
 });
 
+
+// v1 products
+app.get('/products', (req, res, next) => {
+  console.log("TEST productsnew : ");
+  pool.query('Select * from productsnew')
+    .then(testData => {
+      console.log(testData);
+      res.send(testData.rows);
+    });
+});
+
+// v1 testdata
 app.get('/testdata', (req, res, next) => {
   console.log("TEST DATA : ");
   pool.query('Select * from test')
@@ -82,8 +94,8 @@ app.get('/testdata', (req, res, next) => {
 // v2 test products
 
 app.get('/testproducts', (req, res, next) => {
-  console.log("TEST products : ");
-  pool.query('Select * FROM productsnew')
+  console.log("TEST productsnew : ");
+  pool.query('Select * FROM productsnew WHERE id = 1')
     .then(testData => {
       console.log(testData);
       res.send(testData.rows);
