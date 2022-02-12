@@ -13,3 +13,4 @@
 13. Insert new product & Create new API link for products listing only
 14. write PUT REST method into server.js to get correct query from productsnew using req.body.id
 15. Change query for new review to include req.body.id
+16. Create total rating query update and nesting it into new reviews API so the total rating always updated
