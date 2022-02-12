@@ -114,6 +114,67 @@ app.get('/testproducts', (req, res, next) => {
     });
 });
 
+// v1 select all ratings and updated them
+
+app.get('/testselectratings', (req, res, next) => {
+  console.log("TEST productsnew : ");
+  const queries =
+  'SELECT (x.obj ->> \'rating\') AS rating FROM productsnew t CROSS JOIN LATERAL (SELECT x.obj, lag(obj) over(ORDER BY rn) lag_obj FROM jsonb_array_elements(t.reviews) WITH ORDINALITY AS x(obj, rn)) x WHERE id = 2;';
+
+
+  pool.query(queries)
+    .then(testData => {
+      // console.log(testData.rows.length);
+      let row = {}
+
+      let total_rating = 0;
+
+      for (let a = 0; a < testData.rows.length; a++) {
+        total_rating += parseInt(testData.rows[a].rating);
+        // console.log(parseInt(row.rating));
+      }
+      // console.log(row.rating / testData.rows.length);
+      row.rating = total_rating / testData.rows.length;
+      res.send(row);
+
+      const updateRatingQuery = 'UPDATE productsnew SET rating = ' + row.rating + 'WHERE id = 2';
+
+      pool.query(updateRatingQuery).then(testData => {
+        console.log(testData.rows);
+      });
+    });
+});
+
+
+// v2 select all ratings and updated them
+
+app.post('/updatereviewonproducts/:id', (req, res, next) => {
+  console.log("TEST updatereviewonproducts : ");
+
+
+  pool.query(queries)
+    .then(testData => {
+      // console.log(testData.rows.length);
+      let row = {}
+
+      let total_rating = 0;
+
+      for (let a = 0; a < testData.rows.length; a++) {
+        total_rating += parseInt(testData.rows[a].rating);
+        // console.log(parseInt(row.rating));
+      }
+      // console.log(row.rating / testData.rows.length);
+      row.rating = total_rating / testData.rows.length;
+      res.send(row);
+
+      const updateRatingQuery = 'UPDATE productsnew SET rating = ' + row.rating + 'WHERE id = '+req.body.id+';';
+
+      pool.query(updateRatingQuery).then(testData => {
+        console.log(testData.rows);
+      });
+    });
+});
+
 // v1 test reviews
 
 // app.post('/testreviews', (req, res, next) => {
@@ -148,7 +209,6 @@ app.get('/testproducts', (req, res, next) => {
 
 app.post('/testreviews', (req, res, next) => {
   console.log("TEST reviews : ");
-  console.log(req.body);
 
   // v1 query
   // const queryme =
@@ -203,16 +263,62 @@ app.post('/testreviews', (req, res, next) => {
   "UPDATE productsnew SET reviews = reviews || "
   + "'" + JSON.stringify(req.body.reviews) + "'::JSONB "
   + "WHERE id = " + req.body.id + ";";
+  //
+  // console.log(querymenewreviews);
+  // console.log(querynewreviews);
 
-  console.log(querymenewreviews);
-  console.log(querynewreviews);
+  // Rating.updateOnProducts(req.body.id);
+  // console.log(calculate);
 
-  pool.query(querynewreviews)
+
+  pool.query(querynewreviews).then(testData => {
+    const queries =
+    'SELECT (x.obj ->> \'rating\') AS rating FROM productsnew t CROSS JOIN LATERAL (SELECT x.obj, lag(obj) over(ORDER BY rn) lag_obj FROM jsonb_array_elements(t.reviews) WITH ORDINALITY AS x(obj, rn)) x WHERE id = '+req.body.id+';';
+
+    console.log(queries);
+    console.log(req.body.id);
+
+    let row = {};
+
+    let total_rating = 0;
+
+    pool.query(queries)
     .then(testData => {
-      // console.log(testData);
-      res.send(testData.rows);
+
+
+      for (let a = 0; a < testData.rows.length; a++) {
+        total_rating += parseInt(testData.rows[a].rating);
+        // console.log(parseInt(row.rating));
+      }
+      // console.log(row.rating / testData.rows.length);
+      row.rating = total_rating / testData.rows.length;
+      // res.send(row);
+
+
+      const updateRatingQuery = 'UPDATE productsnew SET rating = ' + row.rating + ' WHERE id = '+req.body.id+';';
+
+
+      pool.query(updateRatingQuery).then(testData => {
+        console.log(row.rating);
+        console.log(updateRatingQuery);
+        res.send(testData.rows);
+      });
+
     });
+
+  });
+
+
+
+
+  // pool.query(updateRatingQuery).then(testData => {
+  //   console.log(testData.rows);
+  // });
+
+
+
 });
+
 
 
 const server = app.listen(3000, function () {
